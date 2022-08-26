@@ -388,7 +388,7 @@ void TQDC::Config()
 void TQDC::QDCConfig()
 {
 
-    //TODO find what channel mask means for qdc
-    auto errCode = CAEN_DGTZ_SetDPPParameters(fHandler, 0, &parHandl.caenParams);
+    //TODO find function for qdc
+    //auto errCode = CAEN_DGTZ_SetDPPParameters(fHandler, 0, &parHandl.caenParams);
 
 }
