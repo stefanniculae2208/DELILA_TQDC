@@ -299,8 +299,11 @@ void TQDC::Config()
 
         //DC offset TODO
         //weird calculations
-/*         errCode = CAEN_DGTZ_SetGroupDCOffset(fHandler, iPar, parHandl.GrpDCOffset[iPar]);
-        CheckErrCode(errCode, "SetGroupDCOffset"); */
+        auto offset = (1 << 16) * parHandl.GrpDCOffset[iPar] / 100;
+        if (parHandl.caenParams.PulsePol[iPar] == 1)//don't actually know the value here !!!!!!
+            offset = (1 << 16) * (100 - parHandl.GrpDCOffset[iPar]) / 100;
+        errCode = CAEN_DGTZ_SetGroupDCOffset(fHandler, iPar, offset);
+        CheckErrCode(errCode, "SetGroupDCOffset");
 
 
     }
@@ -308,6 +311,16 @@ void TQDC::Config()
 
     //only channel by channel TODO
     //does it work for qdc?
+    auto recLength = parHandl.RecordLength / fTimeSample;
+    errCode = CAEN_DGTZ_SetRecordLength(fHandler, recLength);
+    CheckErrCode(errCode, "SetRecordLength");
+
+
+
+
+    uint32_t preTrigger = parHandl.PreTriggerSize / fTimeSample;
+    errCode = CAEN_DGTZ_SetDPPPreTriggerSize(fHandler, -1, preTrigger);
+    CheckErrCode(errCode, "SetDPPPreTriggerSize");
     /* for (auto iCh = 0; iCh < fNChs; iCh++) {
         uint32_t preTrigger = fDigiPar.PreTriggerSize[iCh] / fTimeSample;
         errCode = CAEN_DGTZ_SetDPPPreTriggerSize(fHandler, iCh, preTrigger);
@@ -317,6 +330,9 @@ void TQDC::Config()
                                                     fDigiPar.Polarity[iCh]);
         CheckErrCode(errCode, "SetChannelPulsePolarity");
     } */
+    //up to here
+
+
 
     //trigger
     //sw trigger
@@ -391,4 +407,8 @@ void TQDC::QDCConfig()
     //TODO find function for qdc
     //auto errCode = CAEN_DGTZ_SetDPPParameters(fHandler, 0, &parHandl.caenParams);
 
-}
+    //try with group mask and see if it works
+    auto errCode = CAEN_DGTZ_SetDPPParameters(fHandler, 0b11111111, &parHandl.caenParams);
+    CheckErrCode(errCode, "SetDPPParameters");
+
+} 

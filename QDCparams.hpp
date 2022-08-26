@@ -16,7 +16,7 @@ class QDCparams
 
         for(auto iQDC = 0; iQDC<MAX_X740_GROUP_SIZE; iQDC++){
 
-            RecordLength[iQDC] = 20000;
+            //RecordLength[iQDC] = 20000;
             ChGrpMask[iQDC] = 0b00000000;//disable not connected channels or it will keep OR active
             GrpDCOffset[iQDC] = 20;
 
@@ -78,11 +78,10 @@ class QDCparams
 
     uint16_t DecFactor = 1;//only powers of 2
 
+    uint32_t RecordLength;
+    uint32_t PreTriggerSize = 10 * RecordLength / 100;
 
 
-
-
-    uint32_t RecordLength[MAX_X740_GROUP_SIZE];
 
     uint32_t ChGrpMask[MAX_X740_GROUP_SIZE];
 
