@@ -223,7 +223,7 @@ void TQDC::ReadEvents()
             data->ChargeLong = fppPSDEvents[iCh][iEve].Charge;
             //only 1 charge
             //no idea what overrange and subchannel do
-            //data->ChargeShort = fppPSDEvents[iCh][iEve].ChargeShort;
+            data->ChargeShort = 0xFFFF;//fppPSDEvents[iCh][iEve].ChargeShort;
             data->TimeStamp = tdc;
             data->FineTS = 0;
             
