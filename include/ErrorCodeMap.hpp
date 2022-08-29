@@ -6,7 +6,7 @@
 #include <map>
 #include <string>
 
-std::map<CAEN_DGTZ_ErrorCode, std::string> ErrorCodeMap{
+static const std::map<CAEN_DGTZ_ErrorCode, std::string> ErrorCodeMap{
     {CAEN_DGTZ_Success, "Operation completed successfully"},
     {CAEN_DGTZ_CommError, "Communication error"},
     {CAEN_DGTZ_GenericError, "Unspecified error"},

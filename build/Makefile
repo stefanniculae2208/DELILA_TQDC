@@ -157,17 +157,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named main.o
+# Target rules for targets named testCAEN1740
 
 # Build rule for target.
-main.o: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 main.o
-.PHONY : main.o
+testCAEN1740: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 testCAEN1740
+.PHONY : testCAEN1740
 
 # fast build rule for target.
-main.o/fast:
-	$(MAKE) -f CMakeFiles/main.o.dir/build.make CMakeFiles/main.o.dir/build
-.PHONY : main.o/fast
+testCAEN1740/fast:
+	$(MAKE) -f CMakeFiles/testCAEN1740.dir/build.make CMakeFiles/testCAEN1740.dir/build
+.PHONY : testCAEN1740/fast
 
 main.o: main.cpp.o
 
@@ -175,7 +175,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/main.o.dir/build.make CMakeFiles/main.o.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/testCAEN1740.dir/build.make CMakeFiles/testCAEN1740.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -184,7 +184,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/main.o.dir/build.make CMakeFiles/main.o.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/testCAEN1740.dir/build.make CMakeFiles/testCAEN1740.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -193,8 +193,35 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/main.o.dir/build.make CMakeFiles/main.o.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/testCAEN1740.dir/build.make CMakeFiles/testCAEN1740.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+src/QDCparams.o: src/QDCparams.cpp.o
+
+.PHONY : src/QDCparams.o
+
+# target to build an object file
+src/QDCparams.cpp.o:
+	$(MAKE) -f CMakeFiles/testCAEN1740.dir/build.make CMakeFiles/testCAEN1740.dir/src/QDCparams.cpp.o
+.PHONY : src/QDCparams.cpp.o
+
+src/QDCparams.i: src/QDCparams.cpp.i
+
+.PHONY : src/QDCparams.i
+
+# target to preprocess a source file
+src/QDCparams.cpp.i:
+	$(MAKE) -f CMakeFiles/testCAEN1740.dir/build.make CMakeFiles/testCAEN1740.dir/src/QDCparams.cpp.i
+.PHONY : src/QDCparams.cpp.i
+
+src/QDCparams.s: src/QDCparams.cpp.s
+
+.PHONY : src/QDCparams.s
+
+# target to generate assembly for a file
+src/QDCparams.cpp.s:
+	$(MAKE) -f CMakeFiles/testCAEN1740.dir/build.make CMakeFiles/testCAEN1740.dir/src/QDCparams.cpp.s
+.PHONY : src/QDCparams.cpp.s
 
 src/TQDC.o: src/TQDC.cpp.o
 
@@ -202,7 +229,7 @@ src/TQDC.o: src/TQDC.cpp.o
 
 # target to build an object file
 src/TQDC.cpp.o:
-	$(MAKE) -f CMakeFiles/main.o.dir/build.make CMakeFiles/main.o.dir/src/TQDC.cpp.o
+	$(MAKE) -f CMakeFiles/testCAEN1740.dir/build.make CMakeFiles/testCAEN1740.dir/src/TQDC.cpp.o
 .PHONY : src/TQDC.cpp.o
 
 src/TQDC.i: src/TQDC.cpp.i
@@ -211,7 +238,7 @@ src/TQDC.i: src/TQDC.cpp.i
 
 # target to preprocess a source file
 src/TQDC.cpp.i:
-	$(MAKE) -f CMakeFiles/main.o.dir/build.make CMakeFiles/main.o.dir/src/TQDC.cpp.i
+	$(MAKE) -f CMakeFiles/testCAEN1740.dir/build.make CMakeFiles/testCAEN1740.dir/src/TQDC.cpp.i
 .PHONY : src/TQDC.cpp.i
 
 src/TQDC.s: src/TQDC.cpp.s
@@ -220,7 +247,7 @@ src/TQDC.s: src/TQDC.cpp.s
 
 # target to generate assembly for a file
 src/TQDC.cpp.s:
-	$(MAKE) -f CMakeFiles/main.o.dir/build.make CMakeFiles/main.o.dir/src/TQDC.cpp.s
+	$(MAKE) -f CMakeFiles/testCAEN1740.dir/build.make CMakeFiles/testCAEN1740.dir/src/TQDC.cpp.s
 .PHONY : src/TQDC.cpp.s
 
 # Help Target
@@ -235,10 +262,13 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... main.o"
+	@echo "... testCAEN1740"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/QDCparams.o"
+	@echo "... src/QDCparams.i"
+	@echo "... src/QDCparams.s"
 	@echo "... src/TQDC.o"
 	@echo "... src/TQDC.i"
 	@echo "... src/TQDC.s"

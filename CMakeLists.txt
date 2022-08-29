@@ -27,8 +27,8 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hpp ${PROJECT_SOURCE_DIR}/incl
 file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 
-set(exe_name "main.o")
+set(exe_name "testCAEN1740")
 
 add_executable(${exe_name} main.cpp ${sources} ${headers})
 target_link_libraries(${exe_name} ${ROOT_LIBRARIES} CAENDigitizer)
-install(TARGETS ${exe_name})
+install(TARGETS ${exe_name} DESTINATION ${PROJECT_SOURCE_DIR})
