@@ -135,7 +135,7 @@ void TQDC::AllocateMemory()
     errCode = CAEN_DGTZ_MallocReadoutBuffer(fHandler, &fpReadoutBuffer, &size);
     CheckErrCode(errCode, "MallocReadoutBuffer");
 
-    fppPSDEvents = new CAEN_DGTZ_DPP_PSD_Event_t *[MAX_V1740DPP_CHANNEL_SIZE];
+    fppPSDEvents = new CAEN_DGTZ_DPP_QDC_Event_t *[MAX_V1740DPP_CHANNEL_SIZE];
     errCode = CAEN_DGTZ_MallocDPPEvents(fHandler, (void **)fppPSDEvents, &size);
     CheckErrCode(errCode, "MallocDPPEvents");
 
@@ -220,8 +220,10 @@ void TQDC::ReadEvents()
             auto data = new EveData(parHandl.RecordLength);
             data->ModNumber = 0;
             data->ChNumber = iCh;
-            data->ChargeLong = fppPSDEvents[iCh][iEve].ChargeLong;
-            data->ChargeShort = fppPSDEvents[iCh][iEve].ChargeShort;
+            data->ChargeLong = fppPSDEvents[iCh][iEve].Charge;
+            //only 1 charge
+            //no idea what overrange and subchannel do
+            //data->ChargeShort = fppPSDEvents[iCh][iEve].ChargeShort;
             data->TimeStamp = tdc;
             data->FineTS = 0;
             

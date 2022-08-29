@@ -69,8 +69,8 @@ class TQDC
 
     // Memory
     char *fpReadoutBuffer = nullptr;                         // readout buffer
-    CAEN_DGTZ_DPP_PSD_Event_t **fppPSDEvents = nullptr;      // events buffer
-    CAEN_DGTZ_DPP_PSD_Waveforms_t *fpPSDWaveform = nullptr;  // waveforms buffer
+    CAEN_DGTZ_DPP_QDC_Event_t **fppPSDEvents = nullptr;      // events buffer
+    CAEN_DGTZ_DPP_QDC_Waveforms_t *fpPSDWaveform = nullptr;  // waveforms buffer
 
 
 
