@@ -1,3 +1,6 @@
 # DELILA_TQDC
 
-Unfinished and untested
+cd build/
+cmake ../
+make
+make install
