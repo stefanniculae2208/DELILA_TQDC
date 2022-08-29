@@ -217,7 +217,7 @@ void TQDC::ReadEvents()
             fPreviousTime[iCh] = timeTag;
             auto tdc = (timeTag + fTimeOffset[iCh]) * fTimeSample;
 
-            auto data = new EveData(parHandl.RecordLength[iCh]);
+            auto data = new EveData(parHandl.RecordLength);
             data->ModNumber = 0;
             data->ChNumber = iCh;
             data->ChargeLong = fppPSDEvents[iCh][iEve].ChargeLong;
