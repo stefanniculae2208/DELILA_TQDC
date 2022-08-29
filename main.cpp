@@ -10,6 +10,8 @@ int main()
 
     caenDig.Open();
 
+    caenDig.GetInfo();
+
 
     caenDig.Close();
 
