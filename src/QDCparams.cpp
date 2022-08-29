@@ -36,7 +36,7 @@ QDCparams::QDCparams()
     for(auto iQDC = 0; iQDC<MAX_X740_GROUP_SIZE; iQDC++){
 
         //RecordLength[iQDC] = 20000;
-        ChGrpMask[iQDC] = 0b00000000;//disable not connected channels or it will keep OR active
+        ChGrpMask[iQDC] = 0b11111111;//disable not connected channels or it will keep OR active
         GrpDCOffset[iQDC] = 20;
 
         //QDC
