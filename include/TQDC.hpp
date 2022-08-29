@@ -29,8 +29,6 @@ class TQDC
     void Reset();
 
 
-    void CheckErrCode(CAEN_DGTZ_ErrorCode errCode, std::string funcName = "");
-
 
     std::vector<EveData *> *GetEvents();
 
@@ -53,6 +51,7 @@ class TQDC
 
     private:
     void ReadEvents();
+    void CheckErrCode(CAEN_DGTZ_ErrorCode errCode, std::string funcName = "");
 
 
 
