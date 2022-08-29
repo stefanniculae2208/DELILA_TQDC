@@ -210,13 +210,14 @@ void TQDC::ReadEvents()
     uint32_t nEvents[MAX_V1740DPP_CHANNEL_SIZE];
     errCode = CAEN_DGTZ_GetDPPEvents(fHandler, fpReadoutBuffer, bufferSize,
                                     (void **)(fppPSDEvents), nEvents);
+    CheckErrCode(errCode, "GetDPPEvents");
 
     std::cout<<"Buffsize get events is "<<bufferSize<<std::endl;
 
 
     if (errCode == CAEN_DGTZ_Success) {
         for (auto iCh = 0; iCh < MAX_V1740DPP_CHANNEL_SIZE; iCh++) {//don't know if it's channel by channel or group by group
-        //don't know if it should be 8 or 64
+        //don't know if it should be 8 or 64 (64 in example)
         //must test
 
         std::cout<<"Number of events is "<<nEvents[iCh]<<" for ch "<<iCh<<std::endl;
