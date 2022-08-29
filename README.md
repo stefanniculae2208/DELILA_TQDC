@@ -7,3 +7,5 @@ cmake ../
 make
 
 make install
+
+./testCAEN1740
