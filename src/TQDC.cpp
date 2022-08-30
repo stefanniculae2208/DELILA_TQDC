@@ -197,7 +197,7 @@ void TQDC::ReadEvents()
 {
 
     CAEN_DGTZ_ErrorCode errCode;
-    uint32_t bufferSize;
+    uint32_t bufferSize = 0;
     errCode =
         CAEN_DGTZ_ReadData(fHandler, CAEN_DGTZ_SLAVE_TERMINATED_READOUT_MBLT,
                             fpReadoutBuffer, &bufferSize);
@@ -211,8 +211,6 @@ void TQDC::ReadEvents()
     errCode = CAEN_DGTZ_GetDPPEvents(fHandler, fpReadoutBuffer, bufferSize,
                                     (void **)(fppPSDEvents), nEvents);
     CheckErrCode(errCode, "GetDPPEvents");
-
-    std::cout<<"Buffsize get events is "<<bufferSize<<std::endl;
 
 
     if (errCode == CAEN_DGTZ_Success) {
@@ -276,6 +274,8 @@ void TQDC::ReadEvents()
                 errCode = CAEN_DGTZ_DecodeDPPWaveforms(
                     fHandler, &(fppPSDEvents[iCh][iEve]), fpPSDWaveform);
                 CheckErrCode(errCode, "DecodeDPPWaveforms");
+
+                std::cout<<"Ns is "<<fpPSDWaveform->Ns<<std::endl;
 
                 data->RecordLength = fpPSDWaveform->Ns;
                 data->Trace1.assign(&fpPSDWaveform->Trace1[0],
