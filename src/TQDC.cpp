@@ -204,7 +204,7 @@ void TQDC::ReadEvents()
 
     if (errCode == CAEN_DGTZ_Success) {
         for (auto iCh = 0; iCh < MAX_V1740DPP_CHANNEL_SIZE; iCh++) {//don't know if it's channel by channel or group by group
-        //don't know if it should be 16 or 64
+        //don't know if it should be 8 or 64
         //must test
         for (auto iEve = 0; iEve < nEvents[iCh]; iEve++) {
             const uint64_t TSMask = 0x7FFFFFFF;
