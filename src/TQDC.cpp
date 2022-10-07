@@ -30,6 +30,8 @@ void TQDC::Open()
                                          parHandl.VMEBaseAddress, &fHandler);
     CheckErrCode(errCode, "Open");
 
+    std::cout<<"Finish open"<<std::endl;
+
 }
 
 void TQDC::Close()
@@ -37,6 +39,9 @@ void TQDC::Close()
 
     auto errCode = CAEN_DGTZ_CloseDigitizer(fHandler);
     CheckErrCode(errCode, "Close");
+
+    std::cout<<"Finish close"<<std::endl;
+
 
 }
 
@@ -62,7 +67,7 @@ void TQDC::GetInfo()
         << "PCB revision:\t" << info.PCB_Revision << "\n"
         << "No. bits of the ADC:\t" << info.ADC_NBits << "\n"
         << "Device handler of CAENComm:\t" << info.CommHandle << "\n"
-        << "Device handler of CAENVME:\t" << info.VMEHandle << std::endl;
+        << "Device handler of CAENVME:\t" << info.VMEHandle << std::endl<<std::endl;
 
 }
 
@@ -190,23 +195,38 @@ std::vector<EveData *> *TQDC::GetEvents()
 
 void TQDC::ReadEvents()
 {
+
     CAEN_DGTZ_ErrorCode errCode;
-    uint32_t bufferSize;
+    uint32_t bufferSize = 0;
     errCode =
         CAEN_DGTZ_ReadData(fHandler, CAEN_DGTZ_SLAVE_TERMINATED_READOUT_MBLT,
                             fpReadoutBuffer, &bufferSize);
     CheckErrCode(errCode, "ReadData");
+
+    std::cout<<"Buffsize read data is "<<bufferSize<<std::endl;
+
     if (bufferSize == 0) return;
 
     uint32_t nEvents[MAX_V1740DPP_CHANNEL_SIZE];
     errCode = CAEN_DGTZ_GetDPPEvents(fHandler, fpReadoutBuffer, bufferSize,
                                     (void **)(fppPSDEvents), nEvents);
+    CheckErrCode(errCode, "GetDPPEvents");
+
 
     if (errCode == CAEN_DGTZ_Success) {
         for (auto iCh = 0; iCh < MAX_V1740DPP_CHANNEL_SIZE; iCh++) {//don't know if it's channel by channel or group by group
+<<<<<<< HEAD
         //don't know if it should be 8 or 64
+=======
+        //don't know if it should be 8 or 64 (64 in example)
+>>>>>>> c83ba659f0d65703ffd02489319a521423853c62
         //must test
+
+        std::cout<<"Number of events is "<<nEvents[iCh]<<" for ch "<<iCh<<std::endl;
+
         for (auto iEve = 0; iEve < nEvents[iCh]; iEve++) {
+
+
             const uint64_t TSMask = 0x7FFFFFFF;
             uint64_t timeTag = fppPSDEvents[iCh][iEve].TimeTag;
 
@@ -223,6 +243,8 @@ void TQDC::ReadEvents()
             data->ModNumber = 0;
             data->ChNumber = iCh;
             data->ChargeLong = fppPSDEvents[iCh][iEve].Charge;
+
+            std::cout<<"Cl is "<<data->ChargeLong<<" at ch "<<iCh<<" "<<fppPSDEvents[iCh][iEve].SubChannel<<std::endl;
             //only 1 charge
             //no idea what overrange and subchannel do
             data->ChargeShort = 0xFFFF;//fppPSDEvents[iCh][iEve].ChargeShort;
@@ -256,6 +278,8 @@ void TQDC::ReadEvents()
                 errCode = CAEN_DGTZ_DecodeDPPWaveforms(
                     fHandler, &(fppPSDEvents[iCh][iEve]), fpPSDWaveform);
                 CheckErrCode(errCode, "DecodeDPPWaveforms");
+
+                std::cout<<"Ns is "<<fpPSDWaveform->Ns<<std::endl;
 
                 data->RecordLength = fpPSDWaveform->Ns;
                 data->Trace1.assign(&fpPSDWaveform->Trace1[0],
@@ -382,11 +406,14 @@ void TQDC::Config()
     //DPP settings
     //acq mode
     errCode = CAEN_DGTZ_SetDPPAcquisitionMode(
-      fHandler, parHandl.AcqMode, CAEN_DGTZ_DPP_SAVE_PARAM_EnergyAndTime);
+      fHandler, parHandl.AcqMode, CAEN_DGTZ_DPP_SAVE_PARAM_ChargeAndTime);//energy and time returns error on qdc
     CheckErrCode(errCode, "SetDPPAcquisitionMode");
 
 
     //Num events
+    errCode = CAEN_DGTZ_SetNumEventsPerAggregate(fHandler, 1023);
+    CheckErrCode(errCode, "SetNumEventsPerAggregate");
+
     errCode = CAEN_DGTZ_SetMaxNumAggregatesBLT(fHandler, 1023);
     CheckErrCode(errCode, "SetMaxNumAggregatesBLT");
 
